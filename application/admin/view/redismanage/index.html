@@ -1,0 +1,32 @@
+<body class="childrenBody">
+    <div class="row">
+        <div class="sysNotice col">
+            <blockquote class="layui-elem-quote title">系统基本参数</blockquote>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="200">
+                    <col>
+                    <col width="200">
+                    <col>
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                    <th>域</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </thead>
+                <tbody>
+                {volist name="info" id = 'row'}
+                    <tr>
+                        <td>{$key}</td>
+                        <td>{$row}</td>
+                        <td>{$desc[$key]??''}</td>
+                    </tr>
+                 {/volist}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

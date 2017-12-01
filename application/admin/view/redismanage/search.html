@@ -1,0 +1,70 @@
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote news_search">
+        <div class="layui-inline">
+            <form id="frm1" action="/admin/redismanage/search" method="post">
+            <div class="layui-input-inline">
+                <input type="text" name="key" value="{$Think.post.key}" placeholder="请输入管理员名称" class="layui-input search_input">
+            </div>
+            <a class="layui-btn search_btn" onclick="document.getElementById('frm1').submit()">查询</a>
+            </form>
+        </div>
+    </blockquote>
+    <div class="layui-form news_list">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                     {switch name="type"}
+                        {case value = '4'}<th>key</th><th>分数值</th><th>值</th>{/case}
+                        {case value = '5'}<th>key</th><th>字段</th><th>值</th>{/case}
+                        {default /}<th>key</th><th>值</th>
+                    {/switch}
+                </tr> 
+            </thead>
+            <tbody class="news_content">
+                    {switch name="type"}
+                        {case value = '1'}
+                        <tr>
+	                        <td>{$list.key}</td>
+	                        <td>{$list.value}</td>
+                        </tr>
+                        {/case}
+                        {case value = '2'}
+                        {volist name="list.value" id = 'row'}
+                        <tr>
+                            <td>{$list.key}</td>
+                            <td>{$row}</td>
+                        </tr>
+                        {/volist}
+                        {/case}
+                        {case value = '3'}
+                        {volist name="list.value" id = 'row'}
+                        <tr>
+                            <td>{$list.key}</td>
+                            <td>{$row}</td>
+                        </tr>
+                        {/volist}
+                        {/case}
+                        {case value = '4'}
+                        {volist name="list.value" id = 'row'}
+                        <tr>
+                            <td>{$list.key}</td>
+                            <td>{$key+1}</td>
+                            <td>{$row}</td>
+                        </tr>
+                        {/volist}
+                        {/case}
+                        {case value = '5'}
+                        {volist name="list.value" id = 'row'}
+                        <tr>
+	                        <td>{$list.key}</td>
+	                        <td>{$key}</td>
+	                        <td>{$row}</td>
+                        </tr>
+                        {/volist}
+                        {/case}
+                    {/switch}
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/admin/js/common.js?v=456546"></script>
+</body>

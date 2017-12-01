@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>THINKPHP5 后台管理系统 </title>
+
+    <link href="/static/admin/css/login.css" rel="stylesheet" type="text/css">
+    <link href="/static/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link id="layuicss-laydatecss" rel="stylesheet" href="/static/admin/layui/css/modules/laydate/laydate.css" media="all">
+    <link id="layuicss-skinlayercss" rel="stylesheet" href="/static/admin/css/layer.css" media="all">
+    <link id="layuicss-skincodecss" rel="stylesheet" href="/static/admin/css/code.css" media="all">
+    <script src="/static/admin/js/jquery.js" type="text/javascript"></script>
+    <script src="/static/admin/js/common.js" type="text/javascript"></script>
+    <script src="/static/admin/js/jquery.supersized.min.js"></script>
+    <script src="/static/admin/js/jquery.progressBar.js" type="text/javascript"></script>
+    <script src="/static/admin/js/jquery.validation.min.js"></script>
+    
+    </head>
+
+<body rlt="1" style="">
+<!--主体-->
+{__NOLAYOUT__}
+<div class="login-layout">
+    <div class="top">
+        <h5>THINKPHP5 管理平台<em></em></h5>
+        <h2>系统管理中心</h2>
+    </div>
+    <form method="post" class="layui-form" id="form_login" action="/admin/login">
+        <div class="lock-holder">
+            <div class="form-group pull-left input-username">
+                <label>账号</label>
+                <input name="name" id="user_name" autocomplete="off" type="text" class="input-text" lay-verify="required" value="" title="用户名不能为空">
+            </div>
+            <input type="hidden" name="__token__" value="{$Request.token}" />
+            <i class="fa fa-ellipsis-h dot-left"></i> <i class="fa fa-ellipsis-h dot-right"></i>
+            <div class="form-group pull-right input-password-box">
+                <label>密码</label>
+                <input name="password" id="password" class="input-text" autocomplete="off" type="password" lay-verify="required" pattern="[\S]{6}[\S]*" title="密码不少于6个字符">
+            </div>
+        </div>
+        <div class="avatar"><img src="/static/admin/images/admin.png" alt=""></div>
+        <div class="submit">
+            <span>
+            <div class="code">
+                <div class="arrow"></div>
+                <div class="code-img">
+                    <img src="/admin/captcha.html" alt="点击更换" title="点击更换" onclick="this.src='/admin/captcha.html?v=123'" class="captcha" name="codeimage" id="codeimage" border="0">
+                </div>
+                <a href="JavaScript:void(0);" id="hide" class="close" title="关闭"><i></i></a>
+            </div>
+            <input name="verify" lay-verify="required" type="text" class="input-code" id="captcha" placeholder="输入验证" pattern="[A-z0-9]{4}" title="验证码为4个字符" autocomplete="off" value="">
+            </span>
+            <span>
+              <input name="" class="input-button btn-submit" type="button" value="登录">
+            </span>
+        </div>
+        <div class="submit2"></div>
+    </form>
+    <div class="bottom">
+    </div>
+</div>
+
+
+<script>
+    // 定义全局JS变量
+    var GV = {
+        current_controller: "admin//",
+        base_url: "/static/admin/images/"
+    };
+</script>
+
+    <script src="/static/admin/js/layui.all.js"></script>
+
+<!--页面JS脚本-->
+
+    <script>
+        $(function(){
+            $.supersized({
+                // 功能
+                slide_interval     : 4000,
+                transition         : 1,
+                transition_speed   : 1000,
+                performance        : 1,
+                // 大小和位置
+                min_width          : 0,
+                min_height         : 0,
+                vertical_center    : 1,
+                horizontal_center  : 1,
+                fit_always         : 0,
+                fit_portrait       : 1,
+                fit_landscape      : 0,
+                // 组件
+                slide_links        : 'blank',
+                slides             : [
+                    {image : '/static/admin/images/1.jpg'},
+                    {image : '/static/admin/images/2.jpg'},
+                    {image : '/static/admin/images/3.jpg'},
+                    {image : '/static/admin/images/4.jpg'},
+                    {image : '/static/admin/images/5.jpg'}
+                ]
+            });
+            //显示隐藏验证码
+            $("#hide").click(function(){
+                $(".code").fadeOut("slow");
+            });
+            $("#captcha").focus(function(){
+                $(".code").fadeIn("fast");
+            });
+            //跳出框架在主窗口登录
+            if(top.location!=this.location) top.location=this.location;
+            $('#user_name').focus();
+            if ($.browser.msie && ($.browser.version=="6.0" || $.browser.version=="7.0")){
+                window.location.href='/data/html/ie6update.html';
+            }
+            $("#captcha").nc_placeholder();
+            //动画登录
+             $('.btn-submit').click(function(data){
+                $('.input-username,dot-left').addClass('animated fadeOutRight');
+                $('.input-password-box,dot-right').addClass('animated fadeOutLeft');
+                $('.btn-submit').addClass('animated fadeOutUp');
+                setTimeout(function () {
+                        $('.avatar').addClass('avatar-top');
+                        $('.submit').hide();
+                        $('.submit2').html('<div class="progress"><div class="progress-bar progress-bar-success" aria-valuetransitiongoal="100"></div></div>');
+                        $('.progress .progress-bar').progressbar({
+                            done : function() {
+                                $.ajax({
+                                    url: $("#form_login").attr("action"),
+                                    type: 'post',
+                                    data:$("#form_login").serialize(),
+                                    dataType:'json',
+                                    success: function (info) {
+                                    	if(info.url)
+                                        {
+                                    		setTimeout(function () {
+                                                location.href = info.url;
+                                            }, 1000);
+                                        }
+                                    	else
+                                    	{
+                                    		$('.input-username,dot-left').removeClass('animated fadeOutRight');
+                                            $('.input-password-box,dot-right').removeClass('animated fadeOutLeft');
+                                            $('.btn-submit').removeClass('animated fadeOutUp');
+                                            $('.submit2').html('');
+                                            $('.avatar').removeClass('avatar-top');
+                                            $('.submit').show();
+                                    	}
+                                   		 
+                                       
+                                        layer.msg(info.msg);
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    300);
+
+            }); 
+            // 回车提交表单
+            $('#form_login').keydown(function(event){
+                if (event.keyCode == 13) {
+                    $('.btn-submit').click();
+                }
+            });
+            // 定义全局JS变量
+            var GV = {
+                current_controller: "admin//"
+            };
+        });
+    </script>
+
+<script>
+    //固定层移动
+    $(function(){
+        //管理显示与隐藏
+        $("#admin-manager-btn").click(function () {
+            if ($(".manager-menu").css("display") == "none") {
+                $(".manager-menu").css('display', 'block');
+                $("#admin-manager-btn").attr("title","关闭快捷管理");
+                $("#admin-manager-btn").removeClass().addClass("arrow-close");
+            }
+            else {
+                $(".manager-menu").css('display', 'none');
+                $("#admin-manager-btn").attr("title","显示快捷管理");
+                $("#admin-manager-btn").removeClass().addClass("arrow");
+            }
+        });
+    });
+</script>

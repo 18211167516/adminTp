@@ -1,0 +1,54 @@
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote layui-text">
+                数据库操作
+    </blockquote>
+                  
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>fetch</legend>
+</fieldset>
+ 
+<form class="layui-form" action="/admin/dboperate/fetch_sql" method="post">
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">查询sql</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入内容" name="sql" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <!--<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">编辑器</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+    </div>
+  </div>-->
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+</form>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>query</legend>
+</fieldset>
+
+<form class="layui-form" action="/admin/dboperate/query_sql" method="post">
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">查询sql</label>
+    <div class="layui-input-block">
+      <textarea placeholder="请输入内容" name="sql" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <!--<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">编辑器</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+    </div>
+  </div>-->
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+    </div>
+  </div>
+</form>
+    <script src="/static/admin/js/common.js?v=456546"></script>
+</body>

@@ -1,0 +1,38 @@
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>添加管理员</legend>
+</fieldset>
+<form class="layui-form layui-form-pane" action="{$current_url}" method="post">
+  <div class="layui-form-item">
+    <label class="layui-form-label">新密码</label>
+    <div class="layui-input-inline">
+      <input type="password"  name="new_password" value="" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">确认密码</label>
+    <div class="layui-input-inline">
+      <input type="password"  name="new_password1" value="" required lay-verify="required" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary" onclick="history.back()">返回</button>
+    </div>
+  </div>
+</form>
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form();
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    //layer.msg(JSON.stringify(data.field));
+    // return false;
+    //form.submit();
+  });
+});
+</script>

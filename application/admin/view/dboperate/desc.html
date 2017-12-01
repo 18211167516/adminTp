@@ -1,0 +1,37 @@
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote news_search">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <h3>表名：{$Think.get.name}</h3>
+            </div>
+            <div class="layui-input-inline">
+                <a class="layui-btn layui-btn-normal" href="javascript:history.back();">返回</a>
+            </div>
+        </div>
+    </blockquote>
+    <div class="layui-form news_list">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                   <th>列名</th>
+                        <th>类型</th>
+                        <th>备注</th>
+                        <th>可空</th>
+                        <th>主键</th>
+                </tr> 
+            </thead>
+            <tbody class="news_content">
+                    {volist name="list" id = 'row'}
+                    <tr>
+                        <td>{$row.COLUMN_NAME}</td>
+                        <td>{$row.COLUMN_TYPE}</td>
+                        <td>{$row.COLUMN_COMMENT}</td>
+                        <td>{$row.IS_NULLABLE}</td>
+                        <td>{$row.COLUMN_KEY}</td>
+                    </tr>
+                    {/volist}
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/admin/js/common.js?v=456546"></script>
+</body>

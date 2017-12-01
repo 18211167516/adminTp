@@ -1,0 +1,45 @@
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote news_search">
+        <div class="layui-inline">
+            <form id="frm1" action="" method="get">
+            <div class="layui-input-inline">
+                <input type="text" name="rule_name" value="{$Think.get.rule_name}" placeholder="请输入角色名称" class="layui-input search_input">
+            </div>
+            <a class="layui-btn search_btn" onclick="document.getElementById('frm1').submit()">查询</a>
+            </form>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal newsAdd_btn" href="/admin/rule/rule_add">添加角色</a>
+        </div>
+    </blockquote>
+    <div class="layui-form news_list">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th style="text-align:left;">ID</th>
+                    <th>角色名称</th>
+                    <th>角色描述</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody class="news_content">
+                    {volist name="list" id = 'row'}
+                    <tr>
+                        <td>{$row.id}</td>
+                        <td>{$row.rule_name}</td>
+                        <td>{$row.rule_desc}</td>
+                        <td>{$row.create_time}</td>
+                        <td>
+                            <a href="/admin/rule/rule_assign?id={$row.id}" class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">授权</a>
+                            <a href="/admin/rule/rule_edit?id={$row.id}" class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+                            <a onclick="ajax_confirm('是否删除该角色？','/admin/rule/del?id={$row.id}')" class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+                        </td>
+                    </tr>
+                    {/volist}
+            </tbody>
+        </table>
+    </div>
+    <div id="page">{$list->render()}</div>
+    <script type="text/javascript" src="/static/admin/js/common.js?v=2323"></script>
+</body>

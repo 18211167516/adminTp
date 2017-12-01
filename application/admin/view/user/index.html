@@ -1,0 +1,52 @@
+<body class="childrenBody">
+    <blockquote class="layui-elem-quote news_search">
+        <div class="layui-inline">
+            <form id="frm1" action="" method="get">
+            <div class="layui-input-inline">
+                <input type="text" name="name" value="{$Think.get.name}" placeholder="请输入管理员名称" class="layui-input search_input">
+            </div>
+            <a class="layui-btn search_btn" onclick="document.getElementById('frm1').submit()">查询</a>
+            </form>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal newsAdd_btn" href="/admin/user/add">添加管理员</a>
+        </div>
+    </blockquote>
+    <div class="layui-form news_list">
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th style="text-align:left;">ID</th>
+                    <th>管理员名称</th>
+                    <th>状态</th>
+                    <th>更新时间</th>
+                    <th>角色</th>
+                    <th>操作</th>
+                </tr> 
+            </thead>
+            <tbody class="news_content">
+                    {volist name="list" id = 'row' empty=''}
+                    <tr>
+                        <td>{$row.id}</td>
+                        <td>{$row.name}</td>
+                        <td>{$row.status}</td>
+                        <td>{$row.update_time}</td>
+                        <td>{$row.rule}</td>
+                        <td>
+                            <a href="/admin/user/role_assign?id={$row.id}" class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">分配角色</a>
+                            <a href="/admin/user/edit_password?id={$row.id}" class="layui-btn layui-btn-mini" lay-event="edit">修改密码
+                            </a>
+                            {switch name="$row.status" }
+							    {case value="正常"}<a onclick="ajax_confirm('是否停用该管理员？','/admin/user/stop?id={$row.id}&status=2')"class="layui-btn layui-btn-normal layui-btn-mini" lay-event="del">停用</a>{/case}
+							    {case value="停用"}<a onclick="ajax_confirm('是否启用该管理员？','/admin/user/stop?id={$row.id}&status=1')"class="layui-btn layui-btn-normal layui-btn-mini" lay-event="del">启用</a>{/case}
+							{/switch}
+                            <a onclick="ajax_confirm('是否删除该管理员？','/admin/user/del?id={$row.id}')"class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+                        </td>
+                    </tr>
+                    {/volist}
+            </tbody>
+        </table>
+    </div>
+    <div id="page">{$list->render()}</div>
+    <script src="/static/admin/js/common.js?v=456546"></script>
+</body>

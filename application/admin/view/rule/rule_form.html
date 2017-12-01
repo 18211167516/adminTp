@@ -1,0 +1,35 @@
+<form class="layui-form" action="{$current_url}" method="post">
+  <div class="layui-form-item">
+    <label class="layui-form-label">角色名称</label>
+    <div class="layui-input-inline">
+      <input type="text" name="rule_name" value="{if isset($info)}{$info.rule_name}{/if}" required  lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">角色描述</label>
+    <div class="layui-input-inline">
+      <input type="text" name="rule_desc" value="{if isset($info)}{$info.rule_desc}{/if}" required lay-verify="required" placeholder="请输入角色描述" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="button" class="layui-btn layui-btn-primary" onclick="history.back()">返回</button>
+    </div>
+  </div>
+</form>
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form();
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    //layer.msg(JSON.stringify(data.field));
+    // return false;
+    //form.submit();
+  });
+});
+</script>

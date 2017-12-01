@@ -1,0 +1,36 @@
+<div class="layui-side layui-bg-black">
+            <div class="user-photo">
+                <a class="img" title="我的头像"><img
+                    src="/static/admin/images/face.jpg"></a>
+                <p>
+                    你好！<span class="userName">{$Think.cookie.uname}</span>, 欢迎登录
+                </p>
+            </div>
+            <div class="navBar layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree">
+                    <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="/admin/index/main">
+                        <i class="iconfont icon-computer" data-icon="icon-computer"></i>
+                        <cite>后台首页</cite>
+                    </a>
+                    </li>
+                    {volist name="menu_list" id='row'}
+	                        <li class="layui-nav-item">
+                            <a href="javascript:;"><i class="layui-icon" data-icon="icon-text"></i>
+                        <cite>{$row.doc.description}</cite>
+                        <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                                {volist name="$row.method" id="method"}
+                                <dd>
+                                    <a href="javascript:;" data-url="/{$method.name}"><i class="layui-icon"
+                                        data-icon=""></i><cite>{$method.doc.description}</cite></a>
+                                </dd>
+                                {/volist}
+                        </dl>
+                    </li>
+                    {/volist}
+                    <span class="layui-nav-bar" style="top: 22.5px; height: 0px; opacity: 0;"></span>
+                </ul>
+            </div>
+        </div>

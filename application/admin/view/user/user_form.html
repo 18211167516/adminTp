@@ -1,0 +1,39 @@
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>添加管理员</legend>
+</fieldset>
+<form class="layui-form layui-form-pane" action="{$current_url}" method="post">
+ <div class="layui-form-item">
+    <label class="layui-form-label">管理员名称</label>
+    <div class="layui-input-inline">
+      <input type="hidden" name="__token__" value="{$Request.token}" />
+      <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入管理员名称" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">管理员密码</label>
+    <div class="layui-input-inline">
+      <input type="password"  name="password" value="" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="button" class="layui-btn layui-btn-primary" onclick="history.back()">返回</button>
+    </div>
+  </div>
+</form>
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form();
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    //layer.msg(JSON.stringify(data.field));
+    // return false;
+    //form.submit();
+  });
+});
+</script>

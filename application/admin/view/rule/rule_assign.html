@@ -1,0 +1,54 @@
+<body>
+<form class="layui-form" action="{$current_url}" method="post">
+  {volist name="menu_list" id="vo" key="k"}
+    <div class="layui-form-item">
+    <input type="checkbox" value='role{$k}' lay-filter='role' name="" lay-skin="primary" title="{$vo.doc.description}"></br>
+    <div class="layui-input-block" id="role{$k}">
+      {volist name="vo.method" id="row"}
+      <input type="checkbox" name="rule_rights[]" {if in_array($row.name,$rule_rights)}checked{/if} value="{$row.name}" lay-skin="primary" title="{$row.doc.description}">
+      {/volist}
+    </div>
+  </div>
+{/volist}
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary" onclick="history.go(-1)">返回</button>
+    </div>
+  </div>
+</form>
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form();
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+  });
+  
+  form.on('checkbox(role)', function(data){
+	  //console.log(data.par); //得到checkbox原始DOM对象
+	  //console.log(data.elem.checked); //开关是否开启，true或者false
+	  //console.log(data.value); //开关value值，也可以通过data.elem.value得到
+	  if(data.elem.checked)
+      {
+		  $('#'+data.value).find('input').each(function(index,v){
+	          //console.log($(v));
+	          $(v).prop('checked',true);
+	      })  
+	  }
+	  else
+	  {
+		  $('#'+data.value).find('input').each(function(index,v){
+              //console.log($(v));
+              $(v).prop('checked',false);
+          }) 
+	  }
+	  form.render('checkbox');
+	  //console.log(data.othis); //得到美化后的DOM对象
+	}); 
+});
+</script>
+</body>
