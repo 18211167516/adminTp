@@ -8,12 +8,10 @@ return [
         ],
         'role_file'=> [
                 'admin'=>APP_PATH.'/admin/controller',
-                'demo'=>APP_PATH.'/demo/controller',
         ],
         //不验证权限文件
         'filter_arr' => [
                 'admin'=> ['Login','Common','Index'],
-                'demo' => ['Index'],
         ],
         'desc' => [
                 'redis_version' => 'Redis 服务器版本',

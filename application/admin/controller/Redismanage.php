@@ -30,6 +30,16 @@ class Redismanage extends Controller
     }
     
     /**
+     * 发布
+     * @access list
+     */
+    public function sub()
+    {
+        $redis = new Redis();
+        $res = $redis->publish('news','123123123123');
+    }
+    
+    /**
      * redis搜索
      * @access list
      */
@@ -67,5 +77,7 @@ class Redismanage extends Controller
         $this->assign('list',$info);
         return $this->fetch();
     }
+    
+    
 
 }

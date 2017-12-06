@@ -605,4 +605,11 @@ if (!function_exists('calc'))
       return round($size/pow($base,$i),$digits).' '.$unit[$i] . 'B';
     }
 }
+if(!function_exists('callback'))
+{
+    function callback($instance,$channelName,$message){
+        echo $message;
+    } 
+}
+
 
